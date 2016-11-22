@@ -14,8 +14,6 @@
     <clobbers target="Fingerprint" />
   </js-module>
 
-  <dependency id="cordova-plugin-add-swift-support" url="cordova-plugin-add-swift-support"/>
-
   <!-- ios -->
   <platform name="ios">
     <config-file target="config.xml" parent="/*">
@@ -23,7 +21,8 @@
         <param name="ios-package" value="Fingerprint"/>
       </feature>
     </config-file>
-    <source-file src="src/ios/Fingerprint.swift" />
+    <source-file src="src/ios/Fingerprint.h" />
+    <source-file src="src/ios/Fingerprint.m" />
   </platform>
 
   <!-- android -->
