@@ -1,23 +1,17 @@
 # Cordova Plugin Fingerprint All-In-One
 ## **A** ndroid and **IO** s
 
-[![NPM](https://nodei.co/npm/cordova-plugin-fingerprint-aio.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/cordova-plugin-fingerprint-aio/)
-
-
 This plugin is an attempt to provide a single interface for accessing fingerprint hardware on both Android 6+ and iOS.
-
-There are some great cordova plugins out there that make use of the fingerprint APIs provided by Android and iOS. But I could not find a project which supports both platforms (correct me if I am wrong). I decided to take their native code and bundle it together in one plugin.
 
 ## Features
 
 * Check if fingerprint scanner is available
 * Fingerprint authentication
-* ngCordova support - [Pull request](https://github.com/driftyco/ng-cordova/pull/1347)
 
 ### Platforms
 
 * Android
-* iOS - **XCode 8** required, plugin uses Swift 3
+* iOS
 
 ## How to use
 
