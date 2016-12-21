@@ -411,8 +411,20 @@ public class Fingerprint extends CordovaPlugin {
         mCallbackContext.sendPluginResult(mPluginResult);
     }
 
-    public static void onCancelled() {
-        mCallbackContext.error("Cancelled");
+    public static void onCancelled(String eventId) {
+        JSONObject resultJson = new JSONObject();
+        String errorMessage = eventId;
+        try {
+			resultJson.put("message", eventId);
+            resultJson.put("eventId", eventId);
+        } catch (JSONException e) {
+            errorMessage = "Failed to set resultJson key value pair: " + e.getMessage();
+            Log.e(TAG, errorMessage);
+        } finally {
+            mCallbackContext.error(resultJson);
+            mPluginResult = new PluginResult(PluginResult.Status.ERROR);
+            mCallbackContext.sendPluginResult(mPluginResult);
+		}
     }
 
     /**

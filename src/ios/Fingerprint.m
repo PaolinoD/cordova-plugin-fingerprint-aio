@@ -26,8 +26,18 @@
                                   // User authenticated successfully
                                   result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
                               } else {
+                                  NSMutableDictionary* errorObj = [NSMutableDictionary dictionaryWithCapacity:2];
+                                  [errorObj setObject:[error localizedDescription] forKey:@"message"];
+                                  switch (error.code) {
+                                      case LAErrorUserCancel:
+                                          [errorObj setObject:@"userCancelled" forKey:@"eventId"];
+                                          break;
+                                      default:
+                                          [errorObj setObject:@"genericError" forKey:@"eventId"];
+                                          break;
+								  }
                                   // User did not authenticate successfully, returning an appropriate message
-                                  result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
+                                  result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:errorObj];
                               }
 
                               [self.commandDelegate sendPluginResult:result callbackId:callbackId];

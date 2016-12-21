@@ -94,7 +94,7 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fingerprint.onCancelled();
+                Fingerprint.onCancelled("userCancelled");
                 dismiss();
             }
         });
@@ -222,7 +222,7 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
             } else {
                 // The user canceled or didn’t complete the lock screen
                 // operation. Go to error/cancellation flow.
-                Fingerprint.onCancelled();
+                Fingerprint.onCancelled("genericError");
             }
             dismiss();
         }
@@ -244,7 +244,7 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
     @Override
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
-        Fingerprint.onCancelled();
+        Fingerprint.onCancelled("genericError");
     }
 
     /**
