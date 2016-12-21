@@ -49,6 +49,8 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
     private Button mSecondDialogButton;
     private View mFingerprintContent;
 
+	private boolean disableBackup = false;
+
     private Stage mStage = Stage.FINGERPRINT;
 
     private KeyguardManager mKeyguardManager;
@@ -77,7 +79,7 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Bundle args = getArguments();
-        boolean disableBackup = args.getBoolean("disableBackup");
+        disableBackup = args.getBoolean("disableBackup");
         Log.d(TAG, "disableBackup: " + disableBackup);
 
         int fingerprint_auth_dialog_title_id = getResources()
@@ -238,7 +240,12 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
 
     @Override
     public void onError() {
-        goToBackup();
+        if(disableBackup) {
+            Fingerprint.onCancelled("genericError");
+            dismiss();
+        } else {
+            goToBackup();
+        }
     }
 
     @Override
